@@ -41,35 +41,36 @@ class DriverModelTests(TestCase):
             f"({self.driver.first_name} {self.driver.last_name})"
         )
 
-        def test_create_driver_with_license_number_and_password(self) -> None:
-            self.assertEqual(
-                self.driver.license_number,
-                self.user_data["license_number"]
-            )
-            self.assertTrue(
-                self.driver.check_password(
-                    self.user_data["password"])
-            )
+    def test_create_driver_with_license_number_and_password(self) -> None:
+        self.assertEqual(
+            self.driver.license_number,
+            self.user_data["license_number"]
+        )
+        self.assertTrue(
+            self.driver.check_password(
+                self.user_data["password"])
+        )
 
-        def test_url(self) -> None:
-            self.assertEqual(
-                self.driver.get_absolute_url(),
-                "/drivers/1/"
-            )
+    def test_url(self) -> None:
+        self.assertEqual(
+            self.driver.get_absolute_url(),
+            "/drivers/1/"
+        )
 
-            class CarModelTests(TestCase):
-                def setUp(self) -> None:
-                    self.manufacturer = Manufacturer.objects.create(
-                        name="Test Manufacturer",
-                        country="Test Country"
-                    )
-                    self.car = Car.objects.create(
-                        model="Test",
-                        manufacturer=self.manufacturer
-                    )
 
-                def test_str(self) -> None:
-                    self.assertEqual(
-                        str(self.car),
-                        f"{self.car.model}"
-                    )
+class CarModelTests(TestCase):
+    def setUp(self) -> None:
+        self.manufacturer = Manufacturer.objects.create(
+            name="Test Manufacturer",
+            country="Test Country"
+        )
+        self.car = Car.objects.create(
+            model="Test",
+            manufacturer=self.manufacturer
+        )
+
+    def test_str(self) -> None:
+        self.assertEqual(
+            str(self.car),
+            f"{self.car.model}"
+        )
